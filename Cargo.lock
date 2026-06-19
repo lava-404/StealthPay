@@ -4444,6 +4444,7 @@ dependencies = [
  "solana-transaction",
  "solana-transaction-status-client-types",
  "tokio",
+ "tower-http",
 ]
 
 [[package]]

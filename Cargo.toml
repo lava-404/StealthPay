@@ -27,3 +27,4 @@ solana-system-interface = { version = "3.1", features = ["bincode"] }
 solana-transaction = "3.1"
 solana-transaction-status-client-types = "4.0"
 tokio = { version = "1.52.3", features = ["macros", "rt-multi-thread"] }
+tower-http = { version = "0.6", features = ["cors"] }

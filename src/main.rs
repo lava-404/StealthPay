@@ -7,7 +7,7 @@ use solana_client::rpc_client::RpcClient;
 use solana_keypair::Keypair;
 use std::sync::Arc;
 use tokio::net::TcpListener;
-
+use tower_http::cors::CorsLayer;
 mod relayer;
 mod routes;
 mod stealth;
@@ -40,10 +40,12 @@ async fn main() {
         .route("/send", post(routes::send::send_stealth_payment))
         .route("/relay", post(routes::relay::relay_transaction))
         .route("/payments", get(routes::payments::get_payments))
+        .route("/health", get(routes::health::health))
+        .layer(CorsLayer::permissive())
         .with_state(shared_state);
 
-    let listener = TcpListener::bind("0.0.0.0:3000").await.unwrap();
-    println!("Server running on http://0.0.0.0:3000");
+    let listener = TcpListener::bind("0.0.0.0:8080").await.unwrap();
+    println!("Server running on http://0.0.0.0:8080");
 
     axum::serve(listener, app).await.unwrap();
 }
